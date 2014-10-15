@@ -7,7 +7,7 @@
  *
  * @author Ruslan Fadeev <fadeevr@gmail.com>
  *
- * @var Bootstrap $this
+ * @var Booster $this
  */
 return array(
 	'font-awesome' => array(
@@ -15,7 +15,7 @@ return array(
 		'css' => array(($this->minify || $this->enableCdn) ? 'css/font-awesome.min.css' : 'css/font-awesome.css'),
 	),
 	'bootstrap.js' => array(
-		'baseUrl' => $this->enableCdn ? '//netdna.bootstrapcdn.com/bootstrap/3.1.1/' : $this->getAssetsUrl() . '/bootstrap/',
+		'baseUrl' => $this->enableCdn ? '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/' : $this->getAssetsUrl() . '/bootstrap/',
 		'js' => array($this->minify ? 'js/bootstrap.min.js' : 'js/bootstrap.js'),
 		'depends' => array('jquery'),
 	),
@@ -33,7 +33,8 @@ return array(
 	),
 	'notify' => array(
 		'baseUrl' => $this->getAssetsUrl() . '/notify/',
-		'js' => array($this->minify ? 'notify.min.js' : 'notify.js')
+		'js' => array($this->minify ? 'notify.min.js' : 'notify.js'),
+		'depends' => array('jquery'),
 	),
     'bootstrap-noconflict' => array(
         'baseUrl' => $this->getAssetsUrl(),
@@ -145,7 +146,7 @@ return array(
 		'depends' => array('bootstrap.js'),
 		'baseUrl' => $this->getAssetsUrl() . '/bootstrap-markdown',
 		'css' => array('css/bootstrap-markdown.min.css'),
-		'js' => array('js/bootstrap-markdown.js'),
+		'js' => array('js/bootstrap-markdown.js', 'js/to-markdown.js', 'js/markdown.js'),
 	),
 	'switch' => array(
 		'depends' => array('bootstrap.js'),

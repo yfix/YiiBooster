@@ -43,12 +43,12 @@ class TbButton extends TbWidget {
 	const SIZE_SMALL = 'small';
 	const SIZE_EXTRA_SMALL = 'extra_small';
 	
-	protected static $sizeClasses = [
+	protected static $sizeClasses = array(
 		self::SIZE_LARGE => 'btn-lg',
 		self::SIZE_DEFAULT => '',
 		self::SIZE_SMALL => 'btn-sm',
 		self::SIZE_EXTRA_SMALL => 'btn-xs',
-	];
+	);
 
 	/**
 	 * @var string the button callback types.
@@ -169,6 +169,10 @@ class TbButton extends TbWidget {
 		if ($this->isValidContext()) {
 			$classes[] = 'btn-' . $this->getContextClass();
 		}
+		
+		if($this->buttonType == self::BUTTON_LINK) {
+			$classes[] = 'btn-link';
+		}
 
 		$validSizes = array(
 			self::SIZE_LARGE, 
@@ -237,7 +241,7 @@ class TbButton extends TbWidget {
 
 		if (isset($this->icon)) { // no need for implode as newglyphicon only supports one icon
 			if (strpos($this->icon, 'icon') === false && strpos($this->icon, 'fa') === false) {
-				$this->icon = 'glyphicon glyphicon-' . $this->icon; // implode(' glyphicon-', explode(' ', $this->icon));
+				$this->icon = 'glyphicon glyphicon-' . $this->icon;
 				$this->label = '<span class="' . $this->icon . '"></span> ' . $this->label;
 			} else { // to support font awesome icons
 				$this->label = '<i class="' . $this->icon . '"></i> ' . $this->label;
@@ -363,11 +367,13 @@ class TbButton extends TbWidget {
 				return $this->createToggleButton('checkbox');
 				
 			default:
-			case self::BUTTON_BUTTON:
 				return CHtml::htmlButton($this->label, $this->htmlOptions);
 		}
 	}
 	
+	/**
+	 * @param string $toggleType
+	 */
 	protected function createToggleButton($toggleType) {
 		
 		$html = '';

@@ -23,7 +23,7 @@
  * @author Amr Bedair <amr.bedair@gmail.com>
  * @version 3.0.1
  * 
- * Bootstrap 3.1.1
+ * Bootstrap 3.x.x
  * @author Amr Bedair <amr.bedair@gmail.com>
  * @version 4.0.0
  * 
@@ -435,8 +435,8 @@ class Booster extends CApplicationComponent {
 	protected function createBootstrapCssPackage() {
 		
 		return array('bootstrap.css' => array(
-			'baseUrl' => $this->enableCdn ? '//netdna.bootstrapcdn.com/bootstrap/3.1.1/' : $this->getAssetsUrl() . '/bootstrap/',
-			'css' => array( ($this->minify || $this->enableCdn) ? 'css/bootstrap.min.css' : 'css/bootstrap.css' ),
+			'baseUrl' => $this->enableCdn ? '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/' : $this->getAssetsUrl() . '/bootstrap/',
+			'css' => array($this->minify ? 'css/bootstrap.min.css' : 'css/bootstrap.css'),
 		));
 	}
 
@@ -509,27 +509,8 @@ class Booster extends CApplicationComponent {
 		return uniqid(__CLASS__ . '#', true);
 	}
 
-	/**
-	 * @param $name
-	 *
-	 * @return mixed
-	 */
-	protected function tryGetSelectorForPlugin($name) {
-		
-		return $this->tryGetInfoForPlugin($name, 'selector');
-	}
-
-	/**
-	 * @param $name
-	 * @return mixed
-	 */
-	protected function tryGetOptionsForPlugin($name) {
-		
-		return $this->tryGetInfoForPlugin($name, 'options');
-	}
-
     /**
-     * @param Bootstrap $value
+     * @param Booster $value
      * @since 2.1.0
      */
     public static function setBooster($value) {
@@ -540,7 +521,7 @@ class Booster extends CApplicationComponent {
     }
 
     /**
-     * @return Bootstrap
+     * @return Booster
      * @since 2.1.0
      */
     public static function getBooster() {

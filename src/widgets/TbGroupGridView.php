@@ -142,7 +142,6 @@ class TbGroupGridView extends TbGridView
 		$cs->registerCoreScript('bbq');
 		if($this->enableHistory)
 			$cs->registerCoreScript('history');
-		// $cs->registerScriptFile($this->baseScriptUrl.'/jquery.yiigridview.js',CClientScript::POS_END);
 		$cs->registerPackage('group-grid-view');
 		$cs->registerScript(__CLASS__.'#'.$id,"jQuery('#$id').yiiGroupGridView($options);");
 	}
@@ -343,13 +342,14 @@ class TbGroupGridView extends TbGridView
 	 *
 	 * @param string[]|TbDataColumn[] $columns
 	 * @param CActiveRecord $data
-	 * @param mixed $rowIndex
+	 * @param integer $rowIndex
 	 *
 	 * @throws CException
 	 * @return mixed
 	 */
 	private function getRowValues($columns, $data, $rowIndex)
 	{
+		$result = array();
 		foreach ($columns as $column) {
 			if ($column instanceOf TbDataColumn) {
 				$result[$column->name] = $this->getDataCellContent($column, $data, $rowIndex);
@@ -363,13 +363,13 @@ class TbGroupGridView extends TbGridView
 				}
 			}
 		}
-		return isset($result) ? $result : false;
+		return $result;
 	}
 
 	/**
 	 * renders extra row
 	 *
-	 * @param mixed $beforeRow
+	 * @param integer $beforeRow
 	 * @param mixed $change
 	 * @param array $columnsInExtra
 	 */

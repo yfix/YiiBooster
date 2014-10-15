@@ -13,6 +13,9 @@ class TbBreadcrumbsTest extends PHPUnit_Framework_TestCase
 		return new TbBreadcrumbs();
 	}
 
+	/**
+	 * @param TbBreadcrumbs $widget
+	 */
 	private function runWidget($widget)
 	{
 		ob_start();
@@ -40,8 +43,6 @@ class TbBreadcrumbsTest extends PHPUnit_Framework_TestCase
 	public function testSeparatorInit()
 	{
 		$widget = $this->makeWidget();
-		$separator = $widget->separator;
-		$widget->init();
 
 		$this->assertAttributeEquals(' &raquo; ', 'separator', $widget);
 	}
@@ -52,7 +53,6 @@ class TbBreadcrumbsTest extends PHPUnit_Framework_TestCase
 		$widget = $this->makeWidget();
 		$widget->homeLink = null;
 		$widget->links = array('test');
-		$widget->init();
 		$this->runWidget($widget);
 		$defaultHomeLink = CHtml::link(Yii::t('zii', 'Home'), Yii::app()->homeUrl);
 		$this->assertAttributeEquals($defaultHomeLink, 'homeLink', $widget);
@@ -61,7 +61,6 @@ class TbBreadcrumbsTest extends PHPUnit_Framework_TestCase
 		$widget = $this->makeWidget();
 		$widget->homeLink = false;
 		$widget->links = array('test');
-		$widget->init();
 
 		$content = $this->runWidget($widget);
 		$actualHtml = new DOMDocument();
@@ -76,7 +75,6 @@ class TbBreadcrumbsTest extends PHPUnit_Framework_TestCase
 		$widget = $this->makeWidget();
 		$widget->homeLink = 'foobar';
 		$widget->links = array('test');
-		$widget->init();
 
 		$content = $this->runWidget($widget);
 		$actualHtml = new DOMDocument();
@@ -95,7 +93,6 @@ class TbBreadcrumbsTest extends PHPUnit_Framework_TestCase
 	{
 		// no output produced on empty links
 		$widget = $this->makeWidget();
-		$widget->init();
 		$content = $this->runWidget($widget);
 		$this->assertEmpty($content);
 
@@ -103,7 +100,6 @@ class TbBreadcrumbsTest extends PHPUnit_Framework_TestCase
 		$widget = $this->makeWidget();
 		$widget->homeLink = 'foobar';
 		$widget->links = array('foo' => 'bar', 'end');
-		$widget->init();
 
 		$content = $this->runWidget($widget);
 		$actualHtml = new DOMDocument();
